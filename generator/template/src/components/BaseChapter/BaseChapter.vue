@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/scss/_mixins';
+@import '@/scss/theme';
 
 .base-chapter {
   position: relative;

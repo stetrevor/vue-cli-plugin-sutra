@@ -30,7 +30,7 @@
 
 <script>
 import BaseChapter from '@/components/BaseChapter/BaseChapter'
-import { titles } from '@/components/data.json'
+import { titles } from '@/data.json'
 import { bookmark } from '@/storage'
 
 
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/scss/_mixins';
+@import '@/scss/theme';
 
 .chapter {
   margin: 1.999em 0;

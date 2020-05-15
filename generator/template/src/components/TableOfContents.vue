@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { titles } from "@/components/data.json"
+import { titles } from "@/data.json"
 
 export default {
   data() {
