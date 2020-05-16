@@ -13,7 +13,7 @@ module.exports = (api, options) => {
   }
 
   if (api.invoking && api.hasPlugin('eslint')) {
-    const { hooks: lint } = require('@vue/cli-plugin-eslint/generator');
-    lint(api);
+    const { hooks } = require('@vue/cli-plugin-eslint/generator');
+    hooks(api);
   }
 }
