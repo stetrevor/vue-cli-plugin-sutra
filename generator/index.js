@@ -11,7 +11,6 @@ module.exports = (api, options) => {
   if (options.dataFile) {
     api.render('./data')
   }
-  console.log('dataFile', options.dataFile);
 
   if (api.invoking && api.hasPlugin('eslint')) {
     const { hooks: lint } = require('@vue/cli-plugin-eslint/generator');
