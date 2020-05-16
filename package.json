@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-sutra",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A framework to wrap sutra content.",
   "main": "index.js",
   "repository": "https://github.com/stetrevor/vue-cli-plugin-sutra",
