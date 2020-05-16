@@ -7,4 +7,9 @@ module.exports = api => {
   })
 
   api.render('./template')
+
+  if (api.invoking && api.hasPlugin('eslint')) {
+    const { hooks: lint } = require('@vue/cli-plugin-eslint/generator');
+    lint(api);
+  }
 }
