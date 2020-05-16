@@ -33,7 +33,6 @@ import BaseChapter from '@/components/BaseChapter/BaseChapter'
 import { titles } from '@/data.json'
 import { bookmark } from '@/storage'
 
-
 export default {
   name: 'chapter',
 
