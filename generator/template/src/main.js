@@ -7,6 +7,8 @@ Vue.config.productionTip = false
 
 Vue.prototype.$workbox = workbox
 
+Vue.prototype.$darkMode = false
+
 new Vue({
   router,
   render: h => h(App),
