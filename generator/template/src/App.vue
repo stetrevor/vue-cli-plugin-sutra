@@ -17,33 +17,33 @@
 </template>
 
 <script>
-import Snackbar from '@/components/Snackbar'
+import Snackbar from "@/components/Snackbar";
 
 export default {
   components: { Snackbar },
 
   created() {
     if (this.$workbox) {
-      this.$workbox.addEventListener('waiting', () => {
-        this.prompt = true
-      })
+      this.$workbox.addEventListener("waiting", () => {
+        this.prompt = true;
+      });
     }
   },
 
   methods: {
     async reload() {
-      this.prompt = false
+      this.prompt = false;
 
-      await this.$workbox.messageSW({ type: 'SKIP_WAITING' })
-    },
+      await this.$workbox.messageSW({ type: "SKIP_WAITING" });
+    }
   },
 
   data() {
     return {
-      prompt: false,
-    }
-  },
-}
+      prompt: false
+    };
+  }
+};
 </script>
 
 <style lang="scss">
