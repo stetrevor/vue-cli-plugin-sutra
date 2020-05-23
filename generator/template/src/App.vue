@@ -47,14 +47,14 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/scss/theme';
+@import "@/scss/theme";
 
 /* colors and font family
  */
 body {
   margin: 0; // reset body margin
-  color: $color-primary; /* grizzly */
-  background-color: $color-primary-lightest; /* moccasin */
+  color: var(--color-primary); /* grizzly */
+  background-color: var(--color-primary-lightest); /* moccasin */
   line-height: 1.7;
   min-width: $query-min-width;
 }
@@ -87,17 +87,17 @@ body {
 }
 
 ::selection {
-  background-color: $color-primary; /* grizzly */
-  color: $color-primary-lightest; /* moccasin */
+  background-color: var(--color-primary); /* grizzly */
+  color: var(--color-primary-lightest); /* moccasin */
 }
 
 a {
-  color: $color-primary;
+  color: var(--color-primary);
   text-decoration: none;
 
   &.router-link-exact-active,
   &:visited {
-    color: $color-accent;
+    color: var(--color-accent);
   }
 }
 </style>

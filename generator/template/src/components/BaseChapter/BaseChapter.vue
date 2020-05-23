@@ -109,7 +109,7 @@ export default {
     width: 100%;
     font-size: 12px;
     letter-spacing: 0;
-    background-color: $color-primary-lightest;
+    background-color: var(--color-primary-lightest);
   }
 
   &__text-hint {
@@ -121,7 +121,7 @@ export default {
   &__progress-bar {
     height: 4px;
     --scroll: 0%;
-    background: linear-gradient(to right, $color-accent var(--scroll), transparent 0);
+    background: linear-gradient(to right, var(--color-accent) var(--scroll), transparent 0);
   }
 
   &__content {
@@ -131,7 +131,7 @@ export default {
       margin-top: 0em;
       font-size: 1.414em;
       font-weight: normal;
-      color: $color-primary-lighter;
+      color: var(--color-primary-lighter);
     }
 
     h2 {
