@@ -53,10 +53,10 @@ export default {
  */
 body {
   margin: 0; // reset body margin
-  color: var(--color-primary); /* grizzly */
-  background-color: var(--color-primary-lightest); /* moccasin */
   line-height: 1.7;
   min-width: $query-min-width;
+  color: var(--color-primary);
+  background-color: var(--color-primary-lightest);
 }
 
 @include media-query-small {
@@ -87,8 +87,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-primary); /* grizzly */
-  color: var(--color-primary-lightest); /* moccasin */
+  background-color: var(--color-primary);
+  color: var(--color-primary-lightest);
 }
 
 a {
