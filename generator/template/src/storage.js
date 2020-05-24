@@ -15,3 +15,13 @@ export const bookmark = {
     window.localStorage.setItem('bookmark.Y', y)
   },
 }
+
+export const darkMode = {
+  getDarkModeSetting() {
+    return window.localStorage.getItem('darkMode')
+  },
+
+  setDarkModeSetting(darkMode) {
+    window.localStorage.setItem('darkMode', darkMode)
+  },
+}
