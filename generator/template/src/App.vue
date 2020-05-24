@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="app"
-    :class="{'dark-mode': $darkMode}"
-  >
+  <div id="app">
     <router-view />
 
     <snackbar
