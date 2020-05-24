@@ -8,10 +8,12 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$workbox = workbox;
 
-const setDarkMode = darkMode =>
-  darkMode
+const setDarkMode = dark => {
+  dark
     ? document.body.classList.add("dark-mode")
     : document.body.classList.remove("dark-mode");
+  darkMode.setDarkModeSetting(dark);
+};
 
 setDarkMode(darkMode.getDarkModeSetting() || true);
 
