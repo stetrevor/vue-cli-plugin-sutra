@@ -5,6 +5,11 @@
     <div class="base-chapter__reading-progress">
       <div class="base-chapter__text-hint">
         <div class="base-chapter__progress">{{ progress }}</div>
+
+        <button class="base-chapter__toggle-dark-mode" @click="toggleDarkMode">
+          {{ darkModeButtonText }}
+        </button>
+
         <div class="base-chapter__read-time">{{ readMinutes }}</div>
       </div>
       <div class="base-chapter__progress-bar"></div>
@@ -13,91 +18,103 @@
 </template>
 
 <script>
-import { bookmark } from '@/storage'
+import { bookmark, darkMode } from "@/storage";
 
 function rafThrottle(fn) {
-  let busy = false
+  let busy = false;
 
   return function() {
-    if (busy) return
+    if (busy) return;
 
-    busy = true
-    fn.apply(this, arguments)
+    busy = true;
+    fn.apply(this, arguments);
     window.requestAnimationFrame(function() {
-      busy = false
-    })
-  }
+      busy = false;
+    });
+  };
 }
 
 export default {
   props: {
     chapterNum: {
       type: [Number, String],
-      required: true,
-    },
+      required: true
+    }
   },
 
   watch: {
     chapterNum: {
       async handler(newValue) {
-        const md = await import(`./chapter-${newValue}.md`)
-        this.content = md.default
+        const md = await import(`./chapter-${newValue}.md`);
+        this.content = md.default;
         this.$nextTick(() => {
-          const content = this.$el.querySelector('.base-chapter__content')
+          const content = this.$el.querySelector(".base-chapter__content");
           this.readMinutes = `${Math.round(
-            content.textContent.length / 250,
-          )} min read`
+            content.textContent.length / 250
+          )} min read`;
 
-          window.scrollTo(0, this.$route.query.Y || 0)
-        })
+          window.scrollTo(0, this.$route.query.Y || 0);
+        });
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
 
   data() {
     return {
-      content: '',
-      progress: '0%',
-      readMinutes: '',
-    }
+      content: "",
+      progress: "0%",
+      readMinutes: "",
+
+      darkModeButtonText: darkMode.getDarkModeSetting()
+        ? "Dark mode is ON"
+        : "Dark mode is OFF"
+    };
   },
 
   methods: {
     updateProgress() {
-      const de = document.documentElement
-      const scrollTop = de.scrollTop
-      const scrollBottom = de.scrollHeight - de.clientHeight
-      const scrollPercent = (scrollTop / scrollBottom) * 100
+      const de = document.documentElement;
+      const scrollTop = de.scrollTop;
+      const scrollBottom = de.scrollHeight - de.clientHeight;
+      const scrollPercent = (scrollTop / scrollBottom) * 100;
       this.$el
-        .querySelector('.base-chapter__progress-bar')
-        .style.setProperty('--scroll', scrollPercent + '%')
-      this.progress = Math.min(Math.ceil(scrollPercent), 100) + '%'
+        .querySelector(".base-chapter__progress-bar")
+        .style.setProperty("--scroll", scrollPercent + "%");
+      this.progress = Math.min(Math.ceil(scrollPercent), 100) + "%";
     },
 
     saveBookmarkY() {
-      bookmark.setY(window.scrollY)
+      bookmark.setY(window.scrollY);
     },
+
+    toggleDarkMode() {
+      const dark = darkMode.getDarkModeSetting();
+      this.$setDarkMode(!dark);
+      this.darkModeButtonText = darkMode.getDarkModeSetting()
+        ? "Dark mode is ON"
+        : "Dark mode is OFF";
+    }
   },
 
   mounted() {
-    document.addEventListener('scroll', rafThrottle(this.updateProgress), {
-      passive: true,
-    })
-    document.addEventListener('scroll', rafThrottle(this.saveBookmarkY), {
-      passive: true,
-    })
+    document.addEventListener("scroll", rafThrottle(this.updateProgress), {
+      passive: true
+    });
+    document.addEventListener("scroll", rafThrottle(this.saveBookmarkY), {
+      passive: true
+    });
   },
 
   beforeDestroy() {
-    document.removeEventListener('scroll', rafThrottle(this.updateProgress))
-    document.removeEventListener('scroll', rafThrottle(this.saveBookmarkY))
-  },
-}
+    document.removeEventListener("scroll", rafThrottle(this.updateProgress));
+    document.removeEventListener("scroll", rafThrottle(this.saveBookmarkY));
+  }
+};
 </script>
 
 <style lang="scss">
-@import '@/scss/theme';
+@import "@/scss/theme";
 
 .base-chapter {
   position: relative;
@@ -110,18 +127,35 @@ export default {
     font-size: 12px;
     letter-spacing: 0;
     background-color: var(--color-primary-lightest);
+    height: 48px;
+    display: flex;
+    flex-direction: column;
   }
 
   &__text-hint {
     margin: 4px 24px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &__toggle-dark-mode {
+    border-radius: 4px;
+    border: 1px solid var(--color-primary-lighter);
+    padding: 4px 12px;
+    background-color: var(--color-primary-lightest);
+    color: var(--color-primary);
   }
 
   &__progress-bar {
     height: 4px;
     --scroll: 0%;
-    background: linear-gradient(to right, var(--color-accent) var(--scroll), transparent 0);
+    background: linear-gradient(
+      to right,
+      var(--color-accent) var(--scroll),
+      transparent 0
+    );
   }
 
   &__content {
