@@ -18,10 +18,12 @@ export const bookmark = {
 
 export const darkMode = {
   getDarkModeSetting() {
-    return window.localStorage.getItem('darkMode')
+    return Boolean(window.localStorage.getItem("darkMode"));
   },
 
   setDarkModeSetting(darkMode) {
-    window.localStorage.setItem('darkMode', darkMode)
-  },
-}
+    const value = darkMode ? "true" : "";
+    window.localStorage.setItem("darkMode", value);
+  }
+};
+
